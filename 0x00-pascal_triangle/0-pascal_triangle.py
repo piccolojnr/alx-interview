@@ -1,21 +1,23 @@
-def pascal_triangle(n):
-    ls = []
+#!/usr/bin/env python3
+
+
+def pascal_triangle(n) -> list:
+    triangle = []
 
     if n <= 0:
-        return ls
+        return triangle
 
-    ls.append([1])
+    triangle.append([1])
 
     for i in range(1, n):
-        new_ls = []
-        ol = ls[-1]
+        tmp1 = []
+        tmp2 = triangle[-1]
 
-        for j in range(len(ol) + 1):
-            f = ol[j - 1] if j - 1 >= 0 else 0
-            l = ol[j] if j < len(ol) else 0
-            new_ls.append(f + l)
+        for j in range(len(tmp2) + 1):
+            f = tmp2[j - 1] if j - 1 >= 0 else 0
+            l = tmp2[j] if j < len(tmp2) else 0
+            tmp1.append(f + l)
 
-        ls.append(new_ls)
+        triangle.append(tmp1)
 
-    return ls
-
+    return triangle
