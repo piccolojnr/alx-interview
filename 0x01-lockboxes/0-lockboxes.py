@@ -13,15 +13,18 @@ def canUnlockAll(boxes: list):
     Returns:
         _type_: boolean
     """
-    keys: list = boxes[0]
-    found = []
-    found.append(0)
+    if not boxes:
+        return False
 
-    while len(found) != len(boxes) and len(keys) > 0:
-        key = keys.pop(0)
+    current_keys: list = boxes[0]
+    unlocked_boxes = []
+    unlocked_boxes.append(0)
 
-        if key < len(boxes) and key not in found:
-            found.append(key)
-            keys.extend(boxes[key])
+    while len(unlocked_boxes) != len(boxes) and len(current_keys) > 0:
+        key = current_keys.pop(0)
 
-    return True if len(found) == len(boxes) else False
+        if key < len(boxes) and key not in unlocked_boxes:
+            unlocked_boxes.append(key)
+            current_keys.extend(boxes[key])
+
+    return True if len(unlocked_boxes) == len(boxes) else False
