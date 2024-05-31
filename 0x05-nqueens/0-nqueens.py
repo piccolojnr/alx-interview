@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
 N-Queens Problem
 The N Queens problem is the problem of placing N chess queens on
