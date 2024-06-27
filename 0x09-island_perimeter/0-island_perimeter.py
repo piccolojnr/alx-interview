@@ -4,14 +4,14 @@ Island Perimeter
 """
 from typing import List
 
+
 def island_perimeter(grid: List[List[int]]) -> int:
     """
     Function that returns the perimeter of the island described in grid
     """
-    
+
     perimeter = 0
-    
-    
+
     for i in range(len(grid)):
         for j in range(len(grid[i])):
             if grid[i][j] == 1:
