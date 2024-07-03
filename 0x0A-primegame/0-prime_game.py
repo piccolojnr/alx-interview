@@ -4,6 +4,14 @@
 
 
 def isPrime(n):
+    """_summary_
+
+    Args:
+        n (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     if n <= 1:
         return False
     if n <= 3:
@@ -19,10 +27,21 @@ def isPrime(n):
 
 
 def removeMultiples(x, nums):
+    """_summary_
+
+    Args:
+        x (_type_): _description_
+        nums (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     return [n for n in nums if n % x != 0]
 
 
 def playGame(n):
+    """_summary_""" 
+
     nums = list(range(1, n + 1))
     turn = 0
 
@@ -38,6 +57,15 @@ def playGame(n):
 
 
 def isWinner(x, nums):
+    """_summary_
+
+    Args:
+        x (_type_): _description_
+        nums (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     maria_wins = 0
     ben_wins = 0
 
