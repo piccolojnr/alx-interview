@@ -40,7 +40,7 @@ def removeMultiples(x, nums):
 
 
 def playGame(n):
-    """_summary_""" 
+    """_summary_"""
 
     nums = list(range(1, n + 1))
     turn = 0
@@ -66,6 +66,10 @@ def isWinner(x, nums):
     Returns:
         _type_: _description_
     """
+
+    if x <= 0:
+        return None
+
     maria_wins = 0
     ben_wins = 0
 
