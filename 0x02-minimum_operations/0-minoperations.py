@@ -1,121 +1,31 @@
 #!/usr/bin/python3
 """
-In a text file, there is a single character H. Your text editor can 
-execute only two operations in this file: Copy All and Paste. 
-Given a number n, write a method that calculates the fewest number of 
+In a text file, there is a single character H. Your text editor can
+execute only two operations in this file: Copy All and Paste.
+Given a number n, write a method that calculates the fewest number of
 operations needed to result in exactly n H characters in the file.
 """
 
 
-def Paste(remainder, number_of_operations, number_of_h_copied, number_of_h_required):
-    """
-    Paste the copied text recursively until the desired number of characters is reached.
-
-    Args:
-    - remainder (int): The remaining number of 'H' characters needed to paste.
-    - number_of_operations (int): The current number of operations performed.
-    - number_of_h_copied (int): The number of 'H' characters currently copied.
-    - number_of_h_required (int): The total number of 'H' characters required.
-
-    Returns:
-    - int: The fewest number of operations needed to result in exactly n H characters in the file.
-    """
-    remainder -= number_of_h_copied
-    number_of_operations += 1
-
-    if remainder == 0:
-        return number_of_operations
-
-    elif remainder < 0:
-        return 0
-
-    p = Paste(
-        remainder,
-        number_of_operations,
-        number_of_h_copied,
-        number_of_h_required,
-    )
-    c = CopyAll(
-        remainder,
-        number_of_operations,
-        number_of_h_copied,
-        number_of_h_required,
-    )
-    if p == 0 and c == 0:
-        return 0
-    elif p == 0:
-        return c
-    elif c == 0:
-        return p
-    else:
-        return min(p, c)
-
-
-def CopyAll(remainder, number_of_operations, number_of_h_copied, number_of_h_required):
-    """
-    Copy all the 'H' characters and recursively paste them until the desired number is reached.
-
-    Args:
-    - remainder (int): The remaining number of 'H' characters needed to paste.
-    - number_of_operations (int): The current number of operations performed.
-    - number_of_h_copied (int): The number of 'H' characters currently copied.
-    - number_of_h_required (int): The total number of 'H' characters required.
-
-    Returns:
-    - int: The fewest number of operations needed to result in exactly n H characters in the file.
-    """
-    number_of_h_copied += number_of_h_copied
-    number_of_operations += 1
-
-    if number_of_h_copied == number_of_h_required:
-        return number_of_operations
-
-    if number_of_h_copied > number_of_h_required:
-        return 0
-
-    p = Paste(
-        remainder,
-        number_of_operations,
-        number_of_h_copied,
-        number_of_h_required,
-    )
-    c = CopyAll(
-        remainder,
-        number_of_operations,
-        number_of_h_copied,
-        number_of_h_required,
-    )
-    if p == 0 and c == 0:
-        return 0
-    elif p == 0:
-        return c
-    elif c == 0:
-        return p
-    else:
-        return min(p, c)
-
-
 def minOperations(n):
+    """Computes the fewest number of operations needed to result
+    in exactly n H characters.
     """
-    Calculates the fewest number of operations needed to result in exactly n H characters in the file.
-
-    Args:
-    - n (int): The desired number of 'H' characters in the file.
-
-    Returns:
-    - int: The fewest number of operations needed to result in exactly n H characters in the file.
-    """
-    if n <= 1:
+    if not isinstance(n, int):
         return 0
-
-    c = CopyAll(n, 0, 1, n)
-    p = Paste(n, 0, 1, n)
-
-    if c == 0 and p == 0:
-        return 0
-    elif c == 0:
-        return p
-    elif p == 0:
-        return c
-    else:
-        return min(c, p)
+    ops_count = 0
+    clipboard = 0
+    done = 1
+    while done < n:
+        if clipboard == 0:
+            clipboard = done
+            done += clipboard
+            ops_count += 2
+        elif n - done > 0 and (n - done) % done == 0:
+            clipboard = done
+            done += clipboard
+            ops_count += 2
+        elif clipboard > 0:
+            done += clipboard
+            ops_count += 1
+    return ops_count
